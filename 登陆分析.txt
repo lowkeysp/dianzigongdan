@@ -1,0 +1,551 @@
+
+一次的请求报文：
+
+GET /oauth/authorize?response_type=code&client_id=QIE479IlXusBDvontwk1Xw==&redirect_uri=http://42.99.2.28:2003/login/login_oauth.do&scope=read+write&state=xyz HTTP/1.1
+Host: 202.97.1.50:8082
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+Referer: http://42.99.2.28:2003/jsp/login.jsp
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+
+
+响应报文：
+
+HTTP/1.1 302 Found
+Server: Apache-Coyote/1.1
+Set-Cookie: oauthsessionid=C36A0EB17CC902A9254C8136AB4C3319; Path=/; HttpOnly
+Pragma: no-cache
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: no-cache
+Cache-Control: no-store
+Location: http://202.97.1.50:8082/login
+Content-Length: 0
+Date: Sun, 23 Sep 2018 06:50:33 GMT
+
+
+
+又一次请求报文：
+
+GET /login HTTP/1.1
+Host: 202.97.1.50:8082
+Connection: keep-alive
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+Referer: http://42.99.2.28:2003/jsp/login.jsp
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: oauthsessionid=C36A0EB17CC902A9254C8136AB4C3319
+
+响应报文：
+
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Content-Type: text/html;charset=utf-8
+Content-Language: zh-CN
+Transfer-Encoding: chunked
+Date: Sun, 23 Sep 2018 06:50:33 GMT
+
+
+上面的就是直接到了login界面了
+
+
+
+dologin：
+
+请求报文：
+POST /dologin HTTP/1.1
+Host: 202.97.1.50:8082
+Connection: keep-alive
+Content-Length: 117
+Cache-Control: max-age=0
+Origin: http://202.97.1.50:8082
+Upgrade-Insecure-Requests: 1
+Content-Type: application/x-www-form-urlencoded
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+Referer: http://202.97.1.50:8082/login
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: oauthsessionid=1F557112AEC96A721DDBF897D8F1786F
+
+
+响应报文：
+
+HTTP/1.1 302 Found
+Server: Apache-Coyote/1.1
+Location: http://202.97.1.50:8082/oauth/authorize?response_type=code&client_id=QIE479IlXusBDvontwk1Xw==&redirect_uri=http://42.99.2.28:2003/login/login_oauth.do&scope=read+write&state=xyz
+Content-Length: 0
+Date: Sun, 23 Sep 2018 08:36:30 GMT
+
+
+
+再一次请求：
+
+GET /oauth/authorize?response_type=code&client_id=QIE479IlXusBDvontwk1Xw==&redirect_uri=http://42.99.2.28:2003/login/login_oauth.do&scope=read+write&state=xyz HTTP/1.1
+Host: 202.97.1.50:8082
+Connection: keep-alive
+Cache-Control: max-age=0
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+Referer: http://202.97.1.50:8082/login
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: oauthsessionid=1F557112AEC96A721DDBF897D8F1786F
+
+
+
+
+响应报文：
+
+HTTP/1.1 200 OK
+Server: Apache-Coyote/1.1
+Pragma: no-cache
+Expires: Thu, 01 Jan 1970 00:00:00 GMT
+Cache-Control: no-cache
+Cache-Control: no-store
+Content-Type: text/html;charset=UTF-8
+Content-Language: zh-CN
+Content-Length: 4045
+Date: Sun, 23 Sep 2018 08:36:30 GMT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>服务器登录页面</title>
+<script type="text/javascript" src="webjars/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" src="webjars/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.validate.js"></script>
+<script type="text/javascript" src="js/jquery.validate.add.js"></script>
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="webjars/bootstrap/3.0.3/css/bootstrap.min.css" />
+<link type="text/css" rel="stylesheet" href="css/style.css" />
+
+<script type="text/javascript">
+$(function(){
+    
+    var struts = '';
+    
+    if (struts == 'true') {
+        var msg = '';
+        if (msg != '') {
+            msg = msg.replace(/\|/g, '\n');
+		}
+        alert(msg);
+        if (msg.indexOf('密码已过期') > -1) {
+            location.href="forgotPwd.jsp?change";
+        }
+    }
+
+    //验证表单信息
+    var validator = $("#formDiv").validate({
+        rules : {
+            "userName" :{
+                required : true,
+                minlength : 2,
+                maxlength : 20,
+                teshuNoChinese: true
+            },
+            "password" : {
+                required : true
+            }
+        },
+        errorElement: 'lable',
+        errorPlacement: function(error, element) {
+            error.insertAfter(element.parent());
+        },
+        messages: {
+        },
+        submitHandler: function(form) {
+        	$('.login_button :submit').attr('disabled', 'disabled');
+        	form.submit();
+        }
+    });
+
+    // 技术支持
+    $('#link_support').click(function() {
+        $("#hiddenSupport").toggle('slow');
+    });
+
+    $('.login_button :submit').removeAttr('disabled');
+});
+</script>
+
+</head>
+<body class="login_main">
+    <div class="login_logo"></div>
+    <div class="WB_xline1 oauth_xline">
+        <div class="oauth_wrap">
+            <div>
+                <div class="login_form">
+                    <div class="login_title">
+                        <h2>电子工单管理系统</h2>
+                    </div>
+                    <div class="login_body">
+                        <form id="formDiv" action="dologin" method="post" role="form">
+                            <div class="user">
+                                <i></i>
+                                <input id="user_tel" name="userName" type="text" placeholder="账号"/>
+                            </div>
+                            <div class="user-in">
+                                <i></i>
+                                <input id="user_pwd" name="password" type="password" placeholder="密码"/>
+                                <input name="ts" type="hidden" value="2018-09-23T16:48:09+08:00"/>
+                            </div>
+                            <div class="login_button">
+                                <input value="登录" type="submit">
+                            </div>
+                            <input type="hidden" name="clientId" value="QIE479IlXusBDvontwk1Xw==">
+                        </form>
+
+                    </div>
+                    <div class="login_foot">
+                        <div>
+                            <p class="clearfix">
+                                <a id="link_support" href="javascript:return false;" style="float:right;">技术支持</a>
+                                <a id="forgot_pwd" href="./forgotPwd.jsp" style="float:right;" target="_blank">忘记密码</a>
+                                <a id="forgot_pwd" href="./forgotPwd.jsp?change" style="float:right;" target="_blank">修改密码</a>
+                            </p>
+                            <div id="hiddenSupport" style="display:none"><p>电子工单技术支持</p><p>李　卓：18362971799</p><p>吴迪：18143003381</p><p>许亮：15242146768</p><p>陈玉杰：13311568532</p><p>随身noc技术支持</p><p>陈　昕：18019375766</p><p>系统使用及权限相关问题请联系soc平台支持,账号登录问题请联系随身noc支持</p></div>
+                            <br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+D:\software\anaconda\python.exe D:/repo/dianzigongdan/dzgdCrawl.py
+
+
+
+
+
+
+<!DOCTYPE>
+
+<body>
+<table width="100%" class="emsouttable" border="0" align="center" cellpadding="0" cellspacing="0">
+    <tr class="formtext">
+        <td width="15%" height="20" align="right">故障类型：</td>
+        <td width="21%">链路故障</td>
+        <td width="11%" align="right">是否群障：</td>
+        <td width="21%">否
+        </td>
+        <td width="11%" align="right">
+            <div id="moreack" align='left' style="margin-left: 48px;margin-bottom: 10px;margin-top: 5px"><a href='/tempfile/LINKbook.vsdx' target='_blank'>传输一干链路故障操作指导手册</a></div>
+
+        </td>
+        <td width="21%"></td>
+    </tr>
+    <tr class="forsmtext">
+        <td height="20" align="right"><span>客户信息</span><img id="custimg" class="open" src="/img/add.png" onclick="clistCustInfo()"></td>
+        <td colspan="5">
+            <div id="custinfodiv" class="easyui-panel" style="width: 90%" closed="true">
+                <table id="custinfotb" url="" width="100%" class="easyui-datagrid" data-options="singleSelect:true,fitColumns:true,striped:true,nowrap:true,scrollbarSize :0">
+                    <thead>
+                    <tr>
+                        <th data-options="field:'id',width:'200',align:'center'">序号</th>
+                        <th data-options="field:'custName',width:'200',align:'center'">客户名称</th>
+                        <th data-options="field:'custCir',width:'200',align:'center'">客户电路</th>
+                        <th data-options="field:'custTime',width:'200',align:'center'">客户修复时限</th>
+                    </tr>
+                    </thead>
+                </table>
+            </div>
+        </td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">网络类型：</td>
+        <td>163</td>
+        <td align="right">是否国际：</td>
+        <td>是</td>
+        <td align="right"></td>
+        <td></td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">电路名称：</td>
+        <td>广州法兰克福FRK/CT-GZU/CT 64V4C004*IP</td>
+        <td colspan="2">
+            <!-- <img src="/img/home/波分网络电路状态.png" title="波分网络电路状态查询" style="cursor: hand" onclick="javascript:window.open('/jsp/worksheet/wstrans/routeperformance.jsp?CircuitName=广州法兰克福FRK/CT-GZU/CT 64V4C004*IP','_blank','width=1000,height=700,left=50,top=50,resizable=yes,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes')"> -->
+            <img src="/img/home/路由查询.png" title="路由查询" style="cursor: hand" onclick="javascript:window.open('/jsp/worksheet/wspassagetest/transroutequery.jsp?bc_code=广州法兰克福FRK/CT-GZU/CT 64V4C004*IP&openSrc=reloadopener','_blank','width=1000,height=700,left=50,top=50,resizable=yes,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes')">
+            <img src="/img/home/故障分析.png" title="故障分析" style="cursor: hand" onclick="javascript:window.open(encodeURI(encodeURI('http://132.37.84.200/jtwg/admin/app/analysisFault/analysisFault.jsp?sAccount=EomsAccount&circuitName=广州法兰克福FRK/CT-GZU/CT 64V4C004*IP&dataDomainId=1010001,1010053')),'_blank','width=1000,height=700,left=50,top=50,resizable=yes,location=no,menubar=no,status=no,toolbar=no,scrollbars=yes')">
+        </td>
+        <td align="right">Bundle电路标识：</td>
+        <td></td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">A端设备：</td>
+        <td>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr class="formtext">
+                    <td width="85%">GD-GZ-TT-X-3.163</td>
+                    <td width="15%"><img id="adevice" title="登录设备" src="/img/home/登录设备.png" style="cursor: pointer"
+                     onclick="javascript:window.open('/jsp/worksheet/wsdata/jumptelnet.jsp?devName=GD-GZ-TT-X-3.163&network=network','_blank','width=1000,height=600,left=30,top=30,location=no,resizable=yes,menubar=no,toolbar=no,status=no,scrollbars=yes')">
+                       </td>
+                </tr>
+            </table>
+        </td>
+        <td align="right">A端端口：</td>
+        <td>TenGigE1/8/0/12</td>
+        <td align="right">A端Loopback：</td>
+        <td>202.97.32.55</td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">A端IP：</td>
+        <td></td>
+        <td></td>
+        <td colspan="2" align="right">A端设备端口告警和协议层信息：</td>
+        <td></td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">Z端设备：</td>
+        <td>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr class="formtext">
+                    <td width="85%">GM-FF-INT-F-1.163</td>
+                    <td width="15%"><img id="zdevice" title="登录设备" src="/img/home/登录设备.png" style="cursor: pointer"
+                    onclick="javascript:window.open('/jsp/worksheet/wsdata/jumptelnet.jsp?devName=GM-FF-INT-F-1.163&network=network','_blank','width=1000,height=600,left=30,top=30,location=no,resizable=yes,menubar=no,toolbar=no,status=no,scrollbars=yes')">
+                       </td>
+                </tr>
+            </table>
+        </td>
+        <td align="right">Z端端口：</td>
+        <td>TenGigE0/12/0/4</td>
+        <td align="right">Z端Loopback：</td>
+        <td>202.97.32.128</td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">Z端IP：</td>
+        <td></td>
+        <td></td>
+        <td colspan="2" align="right">Z端设备端口告警和协议层信息：</td>
+        <td></td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">故障发生时间：</td>
+        <td>2019-10-10 07:39:41</td>
+        <td align="right">告警名称：</td>
+        <td>IP电路中断</td>
+        <td align="right">电路带宽：</td>
+        <td>10G</td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">故障现象：</td>
+        <td>中断</td>
+        <td align="right">故障初步分析：</td>
+        <td colspan="3"></td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">故障来源：</td>
+        <td>
+            
+            综合告警系统
+                    </td>
+        <td align="right">关联告警：</td>
+        <td colspan="3"></td>
+    </tr>
+    <tr class="formtext">
+        <td height="20" align="right">故障描述：</td>
+        <td colspan="4" style="word-break:break-all;">电路<广州X3-法兰克福F1-10G(FRK/CT-GZU/CT64V4C004*IP)>发生故障@电路代号(广州法兰克福FRK/CT-GZU/CT64V4C004*IP)</td>
+        <td>
+            
+        </td>
+    </tr>
+</table>
+
+
+<table id="alarmgrid" url="/wsdata/querylinktroublelist.do?wsid=2019101000141" class="easyui-datagrid" data-options="singleSelect:true,fitColumns:true,striped:true,nowrap:true,scrollbarSize :0,width:'100%',height:'auto'">
+    <thead>
+    <tr>
+        <th data-options="field:'rownum',width:'40',align:'center',formatter:showRownum">序号</th>
+        <th data-options="field:'circuitName',width:'80',align:'center'">电路名称</th>
+        <th data-options="field:'deviceNamea',width:'80',align:'center'">设备A名称</th>
+        <th data-options="field:'devicePorta',width:'120',align:'center'">设备A端口</th>
+        <th data-options="field:'deviceIpa',width:'100',align:'center'">设备A ip</th>
+        <th data-options="field:'deviceNamez',width:'120',align:'center'">设备Z名称</th>
+        <th data-options="field:'devicePortz',width:'120',align:'center'">设备Z端口</th>
+        <th data-options="field:'deviceIpz',width:'80',align:'center'">设备Z ip</th>
+        <th data-options="field:'firstAlarmTime',width:'100',align:'center'">首次告警时间</th>
+        <th data-options="field:'lastAlarmTime',width:'100',align:'center'">最后告警时间</th>
+        <th data-options="field:'alarmNum',width:'50',align:'center',formatter:alarmnumcolor">告警次数</th>
+        <th data-options="field:'sk',width:'80',align:'center',formatter:operbtn">操作</th>
+    </tr>
+    </thead>
+</table>
+
+<div id="detailDialog" class="easyui-dialog" closed="true" data-options="title:'告警详细',width:'100%',height:350,modal:true,collapsible:true,resizable:true">
+    <table id="alarmDetailGid"  class="easyui-datagrid" data-options="singleSelect:true,fitColumns:true,striped:true,nowrap:true,scrollbarSize :0,width:'100%',height:'auto'">
+        <thead>
+        <tr>
+            <th data-options="field:'rownum',width:'20',align:'center',formatter:showRownum">序号</th>
+            <th data-options="field:'circuitName',width:'80',align:'center'">电路名称</th>
+            <th data-options="field:'deviceNamea',width:'80',align:'center'">设备A名称</th>
+            <th data-options="field:'devicePorta',width:'120',align:'center'">设备A端口</th>
+            <th data-options="field:'deviceIpa',width:'100',align:'center'">设备A ip</th>
+            <th data-options="field:'deviceNamez',width:'120',align:'center'">设备Z名称</th>
+            <th data-options="field:'devicePortz',width:'120',align:'center'">设备Z端口</th>
+            <th data-options="field:'deviceIpz',width:'80',align:'center'">设备Z ip</th>
+            <th data-options="field:'firstAlarmTime',width:'80',align:'center'">首次告警时间</th>
+            <th data-options="field:'lastAlarmTime',width:'80',align:'center'">最后告警时间</th>
+            
+        </tr>
+        </thead>
+    </table>
+</div>
+<div id="dialogA" class="easyui-dialog" data-options="title:'详细信息',width:700,height:350,collapsible:true,resizable:true,closed:true" >
+    <div id="dealResult"></div>
+    <div style="padding-top: 200px;text-align: center"><button type="button" class="sureButton" onclick="addFeedBack($('#dealResult').html())">添加到反馈</button></div>
+</div>
+<script>
+    function getPortStatus(deviceA,portA,deviceZ,portZ){
+        let statusCell=   $(event.srcElement);
+        statusCell.hide();
+        statusCell.after('<img id="waiting" src="/img/home/waiting.gif"/>');
+        $.ajax({
+            url:'/commonutil/getportstatus.do',
+            type:'post',
+            dataType:'json',
+            data:{deviceA:deviceA,portA:portA,deviceZ:deviceZ,portZ:portZ},
+            success:function(data){
+                statusCell.show();
+                $("#waiting").remove();
+                let showdetail= "";
+                if (data.ResultCode=="0"){
+                    showdetail= data.PortStatus;
+                }else{
+                    showdetail= data.RetDetail;
+                }
+                $("#dealResult").empty();
+                $("#dealResult").prepend(showdetail);
+                $("#dialogA").dialog('open');
+            },error:function(){
+            }
+        });
+    }
+    function checkBaseLine(device,port){
+        let statusCell=   $(event.srcElement);
+        statusCell.hide();
+        statusCell.after('<img id="waiting" src="/img/home/waiting.gif"/>');
+        $.ajax({
+            url:'/commonutil/getfluxbaseline.do',
+            type:'post',
+            dataType:'json',
+            data:{device:device,port:port},
+            success:function(data){
+                statusCell.show();
+                $("#waiting").remove();
+                let showdetail= "";
+                if (data.ResultCode=="0"){
+                    showdetail= data.resultDetail;
+                }else{
+                    showdetail= data.RetDetail;
+                }
+                $("#dealResult").empty();
+                $("#dealResult").prepend(showdetail);
+                $("#dialogA").dialog('open');
+            },error:function(){
+            }
+        });
+    }
+
+    function checkHardCircle(deviceA,portA,deviceZ,portZ,type){
+        const wsid= $("#wsid").val();
+        const statusCell=   $(event.srcElement);
+        statusCell.hide();
+        statusCell.after('<img id="waiting" src="/img/home/waiting.gif"/>');
+        $.ajax({
+            url:'/commonutil/checkHardCircle.do',
+            type:'post',
+            dataType:'json',
+            data:{wsid:wsid,deviceA:deviceA,portA:portA,deviceZ:deviceZ,portZ:portZ,type:type},
+            success:function(data){
+                statusCell.show();
+                $("#waiting").remove();
+                let  showdetail= data.RetDetail;
+                let  resultCode= data.ResultCode;
+                if(resultCode==0){
+                    $.messager.alert("提示","操作成功","info");
+                }else {
+                    $("#dialogA").empty();
+                    $("#dialogA").prepend(showdetail);
+                    $("#dialogA").dialog('open');
+                }
+
+            },error:function(){
+            }
+        });
+    }
+    function addFeedBack(dealfeedback){
+        var wsid= $("#wsid").val();
+        $.ajax({
+            url:'/wstrans/feedbackadd.do',
+            type:'post',
+            dataType:'json',
+            data:{wsid:wsid,dealfeedback:dealfeedback},
+            success:function(data){
+                var result= eval("("+data+")");
+                if (result== 1){
+                    $.messager.alert("提示","操作成功！","info");
+                    $("#dialogA").dialog('close');
+                    $("#dealtb").datagrid("reload");
+                }
+            },error:function(){
+                alert("反馈失败")
+            }
+        });
+    }
+    function operbtn(val,row,index){
+        return '<span>' +
+                '<img title="端口状态查询" style="cursor: pointer;vertical-align: middle" src="/img/static/端口查询.png" onclick="getPortStatus(\''+row.deviceNamea+'\',\''+row.devicePorta+'\',\''+row.deviceNamez+'\',\''+row.devicePortz+'\')">&nbsp;&nbsp;' +
+                '<img title="流量基线查询" style="cursor: pointer;vertical-align: middle" src="/img/static/流量基线查询.png" onclick="checkBaseLine(\''+row.deviceNamea+'\',\''+row.devicePorta+'\')">' +
+                /*'<img title="硬环测试" style="cursor: pointer;vertical-align: middle" src="/img/static/硬环测试.png" onclick="checkHardCircle(\''+row.deviceNamea+'\',\''+row.devicePorta+'\',\''+row.deviceNamez+'\',\''+row.devicePortz+'\',\'hard\')">&nbsp;&nbsp;' +*/
+                '</span>';
+    }
+    function showRownum(val,row,index){
+        return index+1;
+    }
+    function alarmnumcolor(val,row,index){
+        return '<a style="color: red;cursor: pointer;font-weight: bold" onclick="showalarmDetail(\''+row.wsid+'\',\''+row.circuitName+'\')">'+val+'</a>';
+    }
+
+    function showalarmDetail(wsid,cirName){
+        var dataMap={};
+        dataMap.wsid= wsid;
+        dataMap.cirName= cirName;
+        $("#detailDialog").dialog("open");
+        $("#alarmDetailGid").datagrid({url:'/wsdata/queryalarmlinkdetail.do',queryParams:dataMap})
+    }
+</script>
+</body>
+
+Process finished with exit code 0
