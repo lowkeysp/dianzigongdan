@@ -93,14 +93,17 @@ class dzgd_Crawl:
         bytesTemp = tn.read_very_eager()
         strContext = bytesTemp.decode('utf-8')
         command_line = b''
+        command_log = b''
         finish = b''
         #使用display interface的
         display_pattern = '>$'
         if(re.search(display_pattern,strContext)  != None):
             command_line = b'display interface ' + port + b'\n'
+            command_log = b'display logbuffer | include ' + port + b'\n'
             finish = b'>'
         else:
             command_line = b'show interface ' + port + b'\n'
+            command_log = b'show logging | include ' + port + b'\n'
             finish = b'#'
 
         tn.write(command_line)
@@ -111,6 +114,21 @@ class dzgd_Crawl:
         bytesResult = tn.read_very_eager()
         strResult = bytesResult.decode('utf-8')
         print(strResult)
+
+
+        #询问是否想要查询日志
+        print("")
+        if_log= input("是否想要查看日志(Y/N)? ")
+        if(if_log == 'Y'):
+            tn.write(command_log)
+            time.sleep(3)
+            for i in range(15):
+                tn.write(b' ')
+                time.sleep(0.2)
+            bytesResult = tn.read_very_eager()
+            strResult = bytesResult.decode('utf-8')
+            print(strResult)
+
         #关闭telnet
         tn.write(b'\n')
         tn.read_until(finish)
