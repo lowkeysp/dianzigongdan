@@ -74,7 +74,10 @@ class dzgd_Crawl:
     #用来使用telnet登陆设备，获取每个设备的状态
     #注意，IP和port必须是二进制的
     def status(self, IP, port):
+        if(IP == b'None'):
+            return
         #登陆到了设备
+
         tel_user = b'jt_sunpeng2019'
         tel_pwd = b'Sunpeng,./123'
         tn = telnetlib.Telnet(IP, port=23, timeout=20)
@@ -113,6 +116,7 @@ class dzgd_Crawl:
         tn.read_until(finish)
         tn.close()
         time.sleep(3)
+
 
 if __name__ == '__main__':
     ID = input("请输入电子工单号:  ")
